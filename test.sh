@@ -1,3 +1,8 @@
 #!/bin/bash
-CODE=`wget --server-response http://${TEST_URL}/services/EchoProxy 2>&1 | awk '/^  HTTP/{print $2}'`;
-[ ${CODE} -eq "200" ] && exit 0 || exit 1
+LOCALHOST=${TEST_URL}
+CODE=`wget --server-response "http://"${LOCALHOST}":8280/services/EchoProxy" 2>&1 | awk '/^  HTTP/{print $2}'`;
+if [ ${CODE} -eq "200" ] ; then
+  exit 0
+else
+  exit 1
+fi
